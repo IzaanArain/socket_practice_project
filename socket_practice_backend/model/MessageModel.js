@@ -19,6 +19,10 @@ const messageSchema = new Schema(
         type:String,
         default:""
     },
+    group_id:{
+      type:String,
+      default:""
+    },
     time:{
         type:String,
         default:""
