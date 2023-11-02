@@ -7,6 +7,7 @@ function App() {
   const [userName, setUserName] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const [messageList, setMessageList] = useState([]);
 
   const joinRoom = () => {
     if (userName !== "" && room !== "") {
@@ -14,11 +15,28 @@ function App() {
       setShowChat(true);
     }
   };
+
+  useEffect(() => {
+    console.log("useEffect")
+    socket.on("receive_message", (data) => {
+      console.log(data);
+      setMessageList((prev) => {
+        return [...prev, data];
+      });
+    });
+  }, [socket]);
+
   return (
     <>
       <h1>Hello world</h1>
       {showChat ? (
-        <Chat socket={socket} username={userName} room={room} />
+        <Chat
+          socket={socket}
+          username={userName}
+          room={room}
+          messageList={messageList}
+          setMessageList={setMessageList}
+        />
       ) : (
         <div className="join-chat">
           <h3>Join Chat</h3>

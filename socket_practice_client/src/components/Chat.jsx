@@ -1,8 +1,8 @@
 import { useState, useEffect, Fragment } from "react";
 
-const Chat = ({ socket, username, room }) => {
+const Chat = ({ socket, username, room,messageList, setMessageList }) => {
   const [currentMessage, setCurrentMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+  // const [messageList, setMessageList] = useState([]);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -19,17 +19,18 @@ const Chat = ({ socket, username, room }) => {
       setMessageList((prev) => {
         return [...prev, messageData];
       });
+      setCurrentMessage("")
     }
   };
 
-  useEffect(() => {
-    socket.on("receive_message", (data) => {
-      console.log(data);
-      setMessageList((prev) => {
-        return [...prev, data];
-      });
-    });
-  }, [socket]);
+  // useEffect(() => {
+  //   socket.on("receive_message", (data) => {
+  //     console.log(data);
+  //     setMessageList((prev) => {
+  //       return [...prev, data];
+  //     });
+  //   });
+  // }, [socket]);
   return (
     <>
       <div className="chat">

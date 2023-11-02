@@ -30,13 +30,13 @@
   background-color: green;
   color: white;
   font-size: 20px;
+  align-self: flex-end;
 }
 
 #other {
   background-color: cornflowerblue;
   color: white;
   font-size: 20px;
-  align-self: flex-end;
 }
 
 .chat-footer {
