@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const colors = require("colors");
 const { Server } = require("socket.io");
+const Connect=require("./config/DBConnection");
 
 const app = express();
 app.use(cors());
@@ -36,7 +37,9 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => {
-  console.log(`Server runnimg on http://localhost:${PORT}`);
-  console.log(`Server running on port ${PORT}`);
-});
+Connect().then(()=>{
+  server.listen(PORT, () => {
+    console.log(`Server runnimg on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
+  });
+})
